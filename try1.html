@@ -1,62 +1,94 @@
 <html>
 <head>
-	<title>Try 1</title>
-	<style>
-		h1 {
-			text-align: center;
-		}
-		#personInfo { margin: 0 0 40px 25px; }
-		#typeInfo {
-			display: inline-block;
-			width: 70px;
-			font-weight: bold;
-		}
-	</style>
+    <title>Try 1</title>
+    <style>
+        h1 {
+            text-align: center;
+        }
+        button {
+            background-color: blue;
+            color: white;
+            border: 2px solid black;
+            border-radius: 2px;
+            display: inline-block;
+            width: 70px;
+            height: 29;
+        }
+        #personInfo { margin: 0 0 40px 25px; }
+        #typeInfo {
+            display: inline-block;
+            width: 70px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 <script>
+    /*
+        Note : Variable names that start with '$' are variables for storing frequently used strings
+    */
 
-var nama = ["Dimas Syahputra", "Malik Maulana"   ,						// 0 , 1
-						"Bima Tiknanada" , "Ahmad Jay"       ,						// 2 , 3
-						"Dawam"          , "Ghaitza Muhammad"],						// 4 , 5
-			
-				 //		0						1							2						3						4							5
-		hobi = ["Game", "Watching TV", "Football", "Football", "Motorcycle", "Learning"],
+var nama = ["Dimas Syahputra", "Malik Maulana",         // 0 , 1
+            "Bima Tiknanada" , "Ahmad Jay",             // 2 , 3
+            "Dawam"          , "Ghaitza Muhammad"],     // 4 , 5
+		        
+         //    0          1            2            3           4             5
+    hobi = ["Game", "Watching TV", "Football", "Football", "Motorcycle", "Learning"],
 		
-					//			0								1										2									3								4								5
-		email = ["dimass98", "malikmalik.winner", "tiknanda.hidden", "jayjay.strong", "mount.dawam", "ghaitza.itza64"],
-					//   * These e-mails above just fake e-mails
+          //     0               1                    2                 3               4               5
+    email = ["dimass98", "malikmalik.winner", "tiknanda.hidden", "jayjay.strong", "mount.dawam", "ghaitza.itza64"],
+          //   * These e-mails above just fake e-mails
+    
+            //              0                               1                        2                      3                  4                    5
+    address = ["Samarinda, North Kalimantan", "Pontianak, West Kalimantan", "Bandung, West Java", "Surabaya, East Java", "Badung, Bali", "Tidore, North Maluku"],
+            //  * These addresses above just fake addresses
+    
+    // ========== Function Start ==================================================================================
+    
+                                                                // Using JS to write HTML and CSS
+    printInfo = function (n, h, e, a, personID){
+        
+        // ID : Setiap nama orang akan mendapatkan nomor spesifik sesuai nomor urut array, yang akan ditanamkan pada "ID container hide-show" dan "ID tombol".
+        // EN : Each person's name will get a specific number according to the array serial number, which will be embedded in the "hide-show container ID" and "button ID".
+        document.write('<button onclick="hideShow(' + personID + ')" id="button' + personID + '">Show ' + (personID + 1) + '</button><br><br>');
+        document.write('<div id="person' + personID + '" style="display: none;">');
+        document.write('<div id="personInfo">');
+        document.write('<span id="typeInfo">Nama</span>: ' + n + '<br>');               // Name
+        document.write('<span id="typeInfo">Hobi</span>: ' + h + '<br>');               // Hobby
+        document.write('<span id="typeInfo">Email</span>: ' + e + '@gmail.com<br>');    // E-mail
+        document.write('<span id="typeInfo">Address</span>: ' + a + '<br>');            // Address
+        document.write('</div>');
+        document.write('</div>');
+    },
+    
+    hideShow = function (hideShowId){
+        var target = document.getElementById("person" + hideShowId).style,
+            targetButtonText = document.getElementById("button" + hideShowId);
+        if (target.display === "none"){
+            target.display = "block";
+            targetButtonText.innerText = "Hide " + (hideShowId + 1);
+        }
+        else {
+            target.display = "none";
+            targetButtonText.innerText = "Show " + (hideShowId + 1);
+        }
+    }
 		
-						//							0																1												2												3										4										5
-		address = ["Samarinda, North Kalimantan", "Pontianak, West Kalimantan", "Bandung, West Java", "Surabaya, East Java", "Badung, Bali", "Tidore, North Maluku"],
-						//    * These addresses above just fake addresses
 		
-		// ========== Function Start ==================================================================================
-		
-		printInfo = function (n, h, e, a){											// Using JS to write HTML and CSS
-			document.write('<div id="personInfo">');
-			document.write('<span id="typeInfo">Nama</span>: ' + n + '<br>');			// Name
-			document.write('<span id="typeInfo">Hobi</span>: ' + h + '<br>');			// Hobby
-			document.write('<span id="typeInfo">Email</span>: ' + e + '<br>');		// E-mail
-			document.write('<span id="typeInfo">Address</span>: ' + a + '@gmail.com<br>');	// Address
-			document.write('</div>');
-		};
-		
-		
-		// ========== Function End ====================================================================================
+    // ========== Function End ====================================================================================
 	
-	if (nama.length != hobi.length && nama.lenght != email.lenght){
-		document.write('<h1><strong>Error</h1></strong><br><br>');
-		document.write('<strong>Info</strong> : Jumlah variabel tidak sesuai. Mohon diperiksa kembali<br>');
-	}
-	else {
-		document.write('<h1>My Friends</h1><br><br>');
-		document.write('There are ' + nama.length + ' name in this list.<br><br>');
-		for (var i = 0; i < nama.length; i++){
-			printInfo(nama[i], hobi[i], email[i], address[i]);
-		}
-	}
-	
+    if (nama.length != hobi.length || nama.length != email.length || nama.length != address.length){
+        document.write('<h1><strong>Error</h1></strong><br><br>');
+        document.write('<strong>Info</strong> : Jumlah variabel tidak sesuai. Mohon diperiksa kembali<br>');
+    }
+    else {
+        document.write('<h1>My Friends</h1><br><br>');
+        document.write('There are ' + nama.length + ' name in this list.<br><br>');
+        for (var i = 0; i < nama.length; i++){
+            printInfo(nama[i], hobi[i], email[i], address[i], i);
+        }
+    }
+    
 </script>
 
 </body>

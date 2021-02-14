@@ -25,45 +25,46 @@
 <body>
 <script>
     /*
-        Note : Variable names that start with '$' are variables for storing frequently used strings
+        Catatan : Nama variabel yang diawali dengan tanda '$'adalah variabel untuk menyimpan 'string' yang sering digunakan
+        Note    : Variable names that start with '$' are variables for storing frequently used strings
     */
-
-var nama = ["Dimas Syahputra", "Malik Maulana",         // 0 , 1
-            "Bima Tiknanada" , "Ahmad Jay",             // 2 , 3
-            "Dawam"          , "Ghaitza Muhammad"],     // 4 , 5
-		        
-         //    0          1            2            3           4             5
-    hobi = ["Game", "Watching TV", "Football", "Football", "Motorcycle", "Learning"],
-		
-          //     0               1                    2                 3               4               5
-    email = ["dimass98", "malikmalik.winner", "tiknanda.hidden", "jayjay.strong", "mount.dawam", "ghaitza.itza64"],
-          //   * These e-mails above just fake e-mails
     
-            //              0                               1                        2                      3                  4                    5
-    address = ["Samarinda, North Kalimantan", "Pontianak, West Kalimantan", "Bandung, West Java", "Surabaya, East Java", "Badung, Bali", "Tidore, North Maluku"],
-            //  * These addresses above just fake addresses
+let jumlahKeterangan = 4,   // Yaitu : Nama, hobi, email, dan alamat
+    
+    //                [0] name      |   [1] hobby   |       [2] email       |         [3] address
+    absensi =  [["Dimas Syahputra"  , "Game"        , "dimass98"            , "Samarinda, North Kalimantan"],    //  0  // Dimas Syahputra
+                ["Malik Maulana"    , "Watching TV" , "malikmalik.winner"   , "Pontianak, West Kalimantan"] ,    //  1  // Malik Maulana
+                ["Bima Tiknanada"   , "Football"    , "tiknanda.hidden"     , "Bandung, West Java"]         ,    //  2  // Bima Tiknanada
+                ["Ahmad Jay"        , "Football"    , "jayjay.strong"       , "Surabaya, East Java"]        ,    //  3  // Ahmad Jay
+                ["Dawam"            , "Motorcycle"  , "mount.dawam"         , "Badung, Bali"]               ,    //  4  // Dawam
+                ["Ghaitza Muhammad" , "Learning"    , "ghaitza.itza64"      , "Tidore, North Maluku"]]      ,    //  5  // Ghaitza Muhammad
+            // E-mail dan alamat di atas tidak asli
+            // These e-mails and addresses above are just fake
+    
+    
     
     // ========== Function Start ==================================================================================
-    
-                                                                // Using JS to write HTML and CSS
+                                                       // Menggunakan JS untuk membuat HTML dan CSS
+                                                       // Using JS to write HTML and CSS
     printInfo = function (n, h, e, a, personID){
         
         // ID : Setiap nama orang akan mendapatkan nomor spesifik sesuai nomor urut array, yang akan ditanamkan pada "ID container hide-show" dan "ID tombol".
         // EN : Each person's name will get a specific number according to the array serial number, which will be embedded in the "hide-show container ID" and "button ID".
+        let $a = '<span id="typeInfo">';
         document.write('<button onclick="hideShow(' + personID + ')" id="button' + personID + '">Show ' + (personID + 1) + '</button><br><br>');
         document.write('<div id="person' + personID + '" style="display: none;">');
         document.write('<div id="personInfo">');
-        document.write('<span id="typeInfo">Nama</span>: ' + n + '<br>');               // Name
-        document.write('<span id="typeInfo">Hobi</span>: ' + h + '<br>');               // Hobby
-        document.write('<span id="typeInfo">Email</span>: ' + e + '@gmail.com<br>');    // E-mail
-        document.write('<span id="typeInfo">Address</span>: ' + a + '<br>');            // Address
+        document.write($a + 'Nama</span>: ' + n + '<br>');               // Name
+        document.write($a + 'Hobi</span>: ' + h + '<br>');               // Hobby
+        document.write($a + 'Email</span>: ' + e + '@gmail.com<br>');    // E-mail
+        document.write($a + 'Address</span>: ' + a + '<br>');            // Address
         document.write('</div>');
         document.write('</div>');
     },
     
     hideShow = function (hideShowId){
-        var target = document.getElementById("person" + hideShowId).style,
-            targetButtonText = document.getElementById("button" + hideShowId);
+        let target = document.getElementById("person" + hideShowId).style,
+              targetButtonText = document.getElementById("button" + hideShowId);
         if (target.display === "none"){
             target.display = "block";
             targetButtonText.innerText = "Hide " + (hideShowId + 1);
@@ -72,21 +73,33 @@ var nama = ["Dimas Syahputra", "Malik Maulana",         // 0 , 1
             target.display = "none";
             targetButtonText.innerText = "Show " + (hideShowId + 1);
         }
-    }
-		
-		
+    },
+    
+    checking = function(){
+        let tidakLengkap = 0;
+        for (let i = 0; i < absensi.length; i++){
+            if (absensi[i].length != jumlahKeterangan){
+                tidakLengkap++;
+            }
+            if (i == (absensi.length - 1)){      // Jika Array sudah mencapai jumlah target
+                return tidakLengkap;             // If the array has reached the target number
+            }
+        }
+    };
+    
     // ========== Function End ====================================================================================
-	
-    if (nama.length != hobi.length || nama.length != email.length || nama.length != address.length){
+    
+    
+    if (checking() == 0){
+        document.write('<h1>My Friends</h1><br><br>');
+        document.write('There are ' + absensi.length + ' name in this list.<br><br>');
+        for (let i = 0; i < absensi.length; i++){
+            printInfo(absensi[i][0], absensi[i][1], absensi[i][2], absensi[i][3], i);
+        } // End for
+    } // End if
+    else {
         document.write('<h1><strong>Error</h1></strong><br><br>');
         document.write('<strong>Info</strong> : Jumlah variabel tidak sesuai. Mohon diperiksa kembali<br>');
-    }
-    else {
-        document.write('<h1>My Friends</h1><br><br>');
-        document.write('There are ' + nama.length + ' name in this list.<br><br>');
-        for (var i = 0; i < nama.length; i++){
-            printInfo(nama[i], hobi[i], email[i], address[i], i);
-        }
     }
     
 </script>

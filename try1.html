@@ -4,6 +4,7 @@
     <style>
         h1 {
             text-align: center;
+            margin: 0 0 57px 0;
         }
         button {
             background-color: blue;
@@ -12,10 +13,10 @@
             border-radius: 2px;
             display: inline-block;
             width: 70px;
-            height: 29;
+            height: 25;
         }
-        #personInfo { margin: 0 0 40px 25px; }
-        #typeInfo {
+        .personInfo { margin: 0 0 40px 25px; }
+        .typeInfo {
             display: inline-block;
             width: 70px;
             font-weight: bold;
@@ -32,39 +33,41 @@
 let jumlahKeterangan = 4,   // Yaitu : Nama, hobi, email, dan alamat
     
     //                [0] name      |   [1] hobby   |       [2] email       |         [3] address
-    absensi =  [["Dimas Syahputra"  , "Game"        , "dimass98"            , "Samarinda, North Kalimantan"],    //  0  // Dimas Syahputra
-                ["Malik Maulana"    , "Watching TV" , "malikmalik.winner"   , "Pontianak, West Kalimantan"] ,    //  1  // Malik Maulana
-                ["Bima Tiknanada"   , "Football"    , "tiknanda.hidden"     , "Bandung, West Java"]         ,    //  2  // Bima Tiknanada
-                ["Ahmad Jay"        , "Football"    , "jayjay.strong"       , "Surabaya, East Java"]        ,    //  3  // Ahmad Jay
-                ["Dawam"            , "Motorcycle"  , "mount.dawam"         , "Badung, Bali"]               ,    //  4  // Dawam
-                ["Ghaitza Muhammad" , "Learning"    , "ghaitza.itza64"      , "Tidore, North Maluku"]]      ,    //  5  // Ghaitza Muhammad
+    absensi =  [["Dimas Syahputra"  , "Game"        , "dimass98"            , "Samarinda, North Kalimantan"]    ,    //  0  // Dimas Syahputra
+                ["Malik Maulana"    , "Watching TV" , "malikmalik.winner"   , "Pontianak, West Kalimantan" ]    ,    //  1  // Malik Maulana
+                ["Bima Tiknanada"   , "Football"    , "tiknanda.hidden"     , "Bandung, West Java"         ]    ,    //  2  // Bima Tiknanada
+                ["Ahmad Jay"        , "Football"    , "jayjay.strong"       , "Surabaya, East Java"        ]    ,    //  3  // Ahmad Jay
+                ["Dawam"            , "Motorcycle"  , "mount.dawam"         , "Badung, Bali"               ]    ,    //  4  // Dawam
+                ["Ghaitza Muhammad" , "Learning"    , "ghaitza.itza64"      , "Tidore, North Maluku"       ]]   ,    //  5  // Ghaitza Muhammad
             // E-mail dan alamat di atas tidak asli
             // These e-mails and addresses above are just fake
     
     
     
-    // ========== Function Start ==================================================================================
+    // ====================================================================================================
+    // ========== Functions Start =========================================================================
+    
                                                        // Menggunakan JS untuk membuat HTML dan CSS
                                                        // Using JS to write HTML and CSS
     printInfo = function (n, h, e, a, personID){
         
-        // ID : Setiap nama orang akan mendapatkan nomor spesifik sesuai nomor urut array, yang akan ditanamkan pada "ID container hide-show" dan "ID tombol".
-        // EN : Each person's name will get a specific number according to the array serial number, which will be embedded in the "hide-show container ID" and "button ID".
-        let $a = '<span id="typeInfo">';
+        // ID : Setiap orang akan mendapatkan nomor spesifik sesuai nomor urut array, yang akan ditanamkan pada "ID container hide-show" dan "ID tombol".
+        // EN : Each person will get a specific number according to the array serial number, which will be embedded in the "hide-show container ID" and "button ID".
+        let $a = '<span class="typeInfo">';
         document.write('<button onclick="hideShow(' + personID + ')" id="button' + personID + '">Show ' + (personID + 1) + '</button><br><br>');
         document.write('<div id="person' + personID + '" style="display: none;">');
-        document.write('<div id="personInfo">');
-        document.write($a + 'Nama</span>: ' + n + '<br>');               // Name
-        document.write($a + 'Hobi</span>: ' + h + '<br>');               // Hobby
-        document.write($a + 'Email</span>: ' + e + '@gmail.com<br>');    // E-mail
-        document.write($a + 'Address</span>: ' + a + '<br>');            // Address
+        document.write('<div class="personInfo">');
+        document.write($a + 'Nama</span>: '    + n + '<br>'          );    // Full name
+        document.write($a + 'Hobi</span>: '    + h + '<br>'          );    // Hobby
+        document.write($a + 'Email</span>: '   + e + '@gmail.com<br>');    // E-mail
+        document.write($a + 'Address</span>: ' + a + '<br>'          );    // Address
         document.write('</div>');
         document.write('</div>');
     },
     
     hideShow = function (hideShowId){
         let target = document.getElementById("person" + hideShowId).style,
-              targetButtonText = document.getElementById("button" + hideShowId);
+            targetButtonText = document.getElementById("button" + hideShowId);
         if (target.display === "none"){
             target.display = "block";
             targetButtonText.innerText = "Hide " + (hideShowId + 1);
@@ -75,31 +78,62 @@ let jumlahKeterangan = 4,   // Yaitu : Nama, hobi, email, dan alamat
         }
     },
     
+    
+    /* 
+       Fungsi 'checking' ini akan mengecek apakah ada kekurangan tentang jumlah variabel atribut yang sudah ditulis.
+       Saat keterangan ini ditulis, sudah ada 4 variabel atribut yang ditetapkan (nama lengkap, hobi, email, dan alamat).
+       Jika variabel atribut yang ditulis terlalu banyak atau terlalu sedikit, maka halaman 'error' akan ditampilkan
+       
+       This 'checking' function will check if there are any deficiencies of the number of attribute variables that have been written
+       At the time this description was being written, there were already 4 predefined attribute variables (full name, hobby, email, and address)
+       If the attribute variables written is less or more than predefined, then an 'error' page will be displayed
+    */
     checking = function(){
         let tidakLengkap = 0;
         for (let i = 0; i < absensi.length; i++){
-            if (absensi[i].length != jumlahKeterangan){
-                tidakLengkap++;
+            // Data akan dianggap 'error' jika : bukan merupakan 'array' ATAU berupa 'array' namun jumlah variabel atribut didalamnya tidak sesuai ketentuan
+            // Data will be considered error if: it is not an 'array' OR an 'array' but the number of attribute variables in it does not match the conditions
+            if (Array.isArray(absensi[i]) == false || Array.isArray(absensi[i]) && absensi[i].length != jumlahKeterangan){
+                tidakLengkap++;     // Nilai dari variabel ini akan bertambah setiap ada 'error' yang terdeteksi
+                                    // The value of this variable will increase when an error is detected
+            }            
+            if (i == (absensi.length - 1)){      // Jika 'array' sudah mencapai jumlah target, maka nilai akan dikembalikan
+                return tidakLengkap;             // If the array has reached the target number, then the value will be returned
             }
-            if (i == (absensi.length - 1)){      // Jika Array sudah mencapai jumlah target
-                return tidakLengkap;             // If the array has reached the target number
-            }
-        }
+        } // End for
     };
     
-    // ========== Function End ====================================================================================
+    // ========== Functions End ===========================================================================
+    // ====================================================================================================
     
     
+    /* Jumlah variabel atribut akan dicek terlebih dahulu sebelum ditampilkan
+       Jika nilai yang dikembalikan oleh fungsi 'checking' di atas adalah 0 (yang berarti 0 kesalahan), maka halaman akan menampilkan data
+       Jika nilai yang dikembalikan berupa 'bilangan asli', maka halaman akan menampilkan pesan error
+    
+       The number of attribute variables will be checked first before being displayed
+       If the value returned by the 'checking' function above is 0 (which means 0 errors), the page will display the data
+       If the returned value is a 'natural number', the page will display an error message
+    */
     if (checking() == 0){
-        document.write('<h1>My Friends</h1><br><br>');
+        document.write('<h1>My Friends</h1>');
         document.write('There are ' + absensi.length + ' name in this list.<br><br>');
         for (let i = 0; i < absensi.length; i++){
-            printInfo(absensi[i][0], absensi[i][1], absensi[i][2], absensi[i][3], i);
+            printInfo(absensi[i][0], absensi[i][1], absensi[i][2], absensi[i][3],            i           );
+            //          Full name  ,     hobby    ,    e-mail    ,   address    , id number (array number)
         } // End for
     } // End if
     else {
-        document.write('<h1><strong>Error</h1></strong><br><br>');
+        document.write('<h1>Error</h1>');
         document.write('<strong>Info</strong> : Jumlah variabel tidak sesuai. Mohon diperiksa kembali<br>');
+        for (let i = 0; i < absensi.length; i++){
+            if (Array.isArray(absensi[i])){
+                document.write('Array ke-' + i + ' : ' + absensi[i].length + ' atribut variabel<br>');
+            }
+            else {
+                document.write('Array ke-' + i + ' : <span style="background-color: red; color: white;">' + absensi[i].toString().length + ' atribut variabel</span><br>');
+            }
+        }
     }
     
 </script>

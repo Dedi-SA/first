@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+    margin: 0 0 57px 0;
+}
+button {
+    background-color: blue;
+    color: white;
+    border: 2px solid black;
+    border-radius: 2px;
+    display: inline-block;
+    width: 70px;
+    height: 25;
+    }
+.personInfo {
+    margin: 0 0 40px 25px;
+}
+.typeInfo {
+    display: inline-block;
+    width: 70px;
+    font-weight: bold;
+}

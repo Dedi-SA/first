@@ -6,7 +6,7 @@
 <body>
 <script>
     /*
-        Catatan : Nama variabel yang diawali dengan tanda '$'adalah variabel untuk menyimpan 'string' yang sering digunakan
+        Catatan : Nama variabel yang diawali dengan tanda '$' adalah variabel untuk menyimpan 'string' yang sering digunakan
         Note    : Variable names that start with '$' are variables for storing frequently used strings
     */
     
@@ -29,7 +29,7 @@ let jumlahKeterangan = 4,   // Yaitu : Nama, hobi, email, dan alamat
     
                                                        // Menggunakan JS untuk membuat HTML dan CSS
                                                        // Using JS to write HTML and CSS
-    printInfo = function (n, h, e, a, personID){
+    printInfo = function (n, h, e, a, personID) {
         
         // ID : Setiap orang akan mendapatkan nomor spesifik sesuai nomor urut array, yang akan ditanamkan pada "ID container hide-show" dan "ID tombol".
         // EN : Each person will get a specific number according to the array serial number, which will be embedded in the "hide-show container ID" and "button ID".
@@ -45,10 +45,10 @@ let jumlahKeterangan = 4,   // Yaitu : Nama, hobi, email, dan alamat
         document.write('</div>');
     },
     
-    hideShow = function (hideShowId){
+    hideShow = function (hideShowId) {
         let target = document.getElementById("person" + hideShowId).style,
             targetButtonText = document.getElementById("button" + hideShowId);
-        if (target.display === "none"){
+        if (target.display === "none") {
             target.display = "block";
             targetButtonText.innerText = "Hide " + (hideShowId + 1);
         }
@@ -68,16 +68,16 @@ let jumlahKeterangan = 4,   // Yaitu : Nama, hobi, email, dan alamat
        At the time this description was being written, there were already 4 predefined attribute variables (full name, hobby, email, and address)
        If the attribute variables written is less or more than predefined, then an 'error' page will be displayed
     */
-    checking = function(){
+    checking = function() {
         let tidakLengkap = 0;
-        for (let i = 0; i < absensi.length; i++){
+        for (let i = 0; i < absensi.length; i++) {
             // Data akan dianggap 'error' jika : bukan merupakan 'array' ATAU berupa 'array' namun jumlah variabel atribut didalamnya tidak sesuai ketentuan
             // Data will be considered error if: it is not an 'array' OR an 'array' but the number of attribute variables in it does not match the conditions
-            if (Array.isArray(absensi[i]) == false || Array.isArray(absensi[i]) && absensi[i].length != jumlahKeterangan){
+            if (Array.isArray(absensi[i]) == false || Array.isArray(absensi[i]) && absensi[i].length != jumlahKeterangan) {
                 tidakLengkap++;     // Nilai dari variabel ini akan bertambah setiap ada 'error' yang terdeteksi
                                     // The value of this variable will increase when an error is detected
             }            
-            if (i == (absensi.length - 1)){      // Jika 'array' sudah mencapai jumlah target, maka nilai akan dikembalikan
+            if (i == (absensi.length - 1)) {      // Jika 'array' sudah mencapai jumlah target, maka nilai akan dikembalikan
                 return tidakLengkap;             // If the array has reached the target number, then the value will be returned
             }
         } // End for
@@ -95,7 +95,7 @@ let jumlahKeterangan = 4,   // Yaitu : Nama, hobi, email, dan alamat
        If the value returned by the 'checking' function above is 0 (which means 0 errors), the page will display the data
        If the returned value is a 'natural number', the page will display an error message
     */
-    if (checking() == 0){
+    if (checking() == 0) {
         document.write('<h1>My Friends</h1>');
         document.write('There are ' + absensi.length + ' name in this list.<br><br>');
         for (let i = 0; i < absensi.length; i++){
@@ -106,7 +106,7 @@ let jumlahKeterangan = 4,   // Yaitu : Nama, hobi, email, dan alamat
     else {
         document.write('<h1>Error</h1>');
         document.write('<strong>Info</strong> : Jumlah variabel tidak sesuai. Mohon diperiksa kembali<br>');
-        for (let i = 0; i < absensi.length; i++){
+        for (let i = 0; i < absensi.length; i++) {
             if (Array.isArray(absensi[i])){
                 document.write('Array ke-' + i + ' : ' + absensi[i].length + ' atribut variabel<br>');
             }
